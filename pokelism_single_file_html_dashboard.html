@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lyrus — Fisch Marketplace (Roblox)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Lyrus — marketplace jual beli item & map untuk game Fisch di Roblox. Minimalis, modern, siap dipakai." />
+  <style>
+    :root{
+      --bg:#f4f5f6; /* light gray */
+      --card:#ffffff;
+      --muted:#9aa0a6;
+      --text:#111217;
+      --accent:#e9eaec; /* subtle accents */
+      --glass-shadow: 0 10px 30px rgba(17,18,23,0.06);
+      --rounded:20px;
+      --max-width:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .container{max-width:var(--max-width);margin:0 auto;padding:40px 24px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .logo{font-weight:800;font-size:1.25rem;letter-spacing:0.4px}
+    nav{display:flex;gap:20px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    .btn{background:linear-gradient(180deg,#fff,#f2f2f2);border:1px solid #e6e7e8;padding:8px 14px;border-radius:999px;box-shadow:var(--glass-shadow);cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;border:none;color:var(--muted)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 520px;gap:48px;align-items:center;padding:36px 0}
+    .hero-left{position:relative}
+    .hero-eyebg{position:absolute;left:-10px;top:-10px;font-size:6.5rem;color:rgba(17,18,23,0.06);font-weight:800;line-height:0.9;pointer-events:none}
+    h1{font-size:3.1rem;margin:0 0 12px;line-height:0.95}
+    p.lead{color:var(--muted);max-width:48ch;margin:0 0 22px}
+    .ctas{display:flex;gap:14px}
+
+    /* right visual */
+    .hero-visual{background:linear-gradient(180deg,#fbfbfb,#f0f1f2);border-radius:28px;padding:36px 36px;height:420px;display:flex;align-items:center;justify-content:center;box-shadow:var(--glass-shadow);position:relative}
+    .visual-bubble{width:320px;height:320px;border-radius:28px;background:linear-gradient(180deg,#fff,#f6f7f8);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)}
+    .visual-bubble img{width:88%;height:auto;display:block}
+
+    /* Sections */
+    .section{padding:56px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--glass-shadow);display:flex;flex-direction:column}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:12px}
+    .card h3{margin:12px 0 6px;font-size:1.05rem}
+    .meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.95rem}
+
+    /* How it works */
+    .steps{display:flex;gap:16px}
+    .step{background:var(--card);padding:18px;border-radius:14px;flex:1;box-shadow:var(--glass-shadow)}
+    .step .num{width:46px;height:46px;border-radius:12px;background:var(--accent);display:grid;place-items:center;font-weight:700}
+
+    /* CTA */
+    .big-cta{background:linear-gradient(180deg,#fff,#f6f7f8);border-radius:22px;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:var(--glass-shadow)}
+    .big-cta .cta-text{max-width:60%}
+
+    footer{padding:28px 0;color:var(--muted);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center}
+
+    /* small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:24px}
+      .hero-visual{height:320px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .hero-eyebg{font-size:4.4rem;left:-4px}
+    }
+    @media (max-width:640px){
+      .container{padding:20px}
+      .grid{grid-template-columns:1fr}
+      h1{font-size:2rem}
+      .hero-eyebg{font-size:3.2rem}
+    }
+
+    /* tiny niceties */
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #ececec;color:var(--muted);font-weight:600}
+    a.link{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(0,0,0,0.04)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Lyrus</div>
+      <nav>
+        <a href="#features">Marketplace</a>
+        <a href="#how">How it works</a>
+        <a href="#contact">Contact</a>
+        <!-- kept Sell button but avoid calling undefined global; we'll wire it in JS -->
+        <button id="sellBtn" class="btn ghost">Sell</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-eyebg">Fisch</div>
+          <h1>Lyrus — Marketplace for <span style="color:var(--muted);font-weight:800">Fisch</span></h1>
+          <p class="lead">Jual beli map, gamepasses, dan item untuk map Fisch di Roblox. Platform minimalis untuk creator & collector — cepat, aman, dan didesain untuk komunitas.</p>
+          <div class="ctas">
+            <a class="btn" href="#features">Telusuri Listing</a>
+            <button class="btn" id="addListingBtn">Tambah Listing</button>
+          </div>
+          <p style="margin-top:18px;color:var(--muted);font-size:0.9rem">Ingin tampilkan itemmu dengan screenshot? Klik <a class="link" href="#contact">hubungi kami</a> untuk bantuan upload.</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-bubble">
+            <!-- Inline SVG placeholder representing a game map / screenshot -->
+            <img src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900"><rect width="100%" height="100%" rx="24" fill="%23f7f8f9"/><g transform="translate(60,60)"><rect width="780" height="420" rx="14" fill="%23eaeceb"/><rect x="18" y="18" width="240" height="120" rx="8" fill="%23ffffff"/><rect x="18" y="150" width="320" height="220" rx="8" fill="%23ffffff"/></g><text x="50%" y="80%" font-size="28" fill="%239aa0a6" font-family="Inter, Arial" text-anchor="middle">Preview / Ganti dengan screenshot</text></svg>' alt="Preview placeholder">
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <h2 style="margin:0;font-size:1.4rem">Featured Fisch Rods</h2>
+          <div class="pill">Terbaru</div>
+        </div>
+
+        <div class="grid" id="rodGrid">
+          <!-- Rod items (can be updated dynamically) -->
+          <article class="card">
+            <img src="https://i.imgur.com/0Yt7bNd.png" alt="Trident Rod Fisch">
+            <h3>Trident Rod — Abyss Edition</h3>
+            <div class="meta"><span>Seller: <strong>deepSeaPro</strong></span><span>₿ 1,800</span></div>
+            <p style="color:var(--muted);font-size:0.95rem;margin-top:10px;flex:1">
+              Rod edisi kedalaman dengan kemampuan khusus “Trident Strike” untuk tangkapan monster laut.
+            </p>
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <button class="btn">Lihat</button>
+              <button class="btn ghost" data-item="Trident Rod">Beli</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://i.imgur.com/ELW2f3R.png" alt="Seraphic Rod Fisch">
+            <h3>Seraphic Rod — Celestial Tier</h3>
+            <div class="meta"><span>Seller: <strong>skyFisher</strong></span><span>₿ 2,200</span></div>
+            <p style="color:var(--muted);font-size:0.95rem;margin-top:10px;flex:1">
+              Rod langka dengan aura celestial — meningkatkan kemunculan fish langka hingga +40%.
+            </p>
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <button class="btn">Lihat</button>
+              <button class="btn ghost" data-item="Seraphic Rod">Beli</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://i.imgur.com/8xeOJkM.png" alt="Rod Of The Depths Fisch">
+            <h3>Rod Of The Depths — Ultimate Tier</h3>
+            <div class="meta"><span>Seller: <strong>abyssHunter</strong></span><span>₿ 3,500</span></div>
+            <p style="color:var(--muted);font-size:0.95rem;margin-top:10px;flex:1">
+              Rod puncak bagi collector & player advanced — stat maksimum dan efek pasif khusus “Master Catch”.
+            </p>
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <button class="btn">Lihat</button>
+              <button class="btn ghost" data-item="Rod Of The Depths">Beli</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="how" class="section">
+        <h2 style="margin-bottom:18px">How Lyrus works</h2>
+        <div class="steps">
+          <div class="step">
+            <div style="display:flex;gap:12px;align-items:center"><div class="num">1</div><strong>Daftar & verifikasi</strong></div>
+            <p style="color:var(--muted);margin-top:10px">Buat akun Roblox/Discord, lalu verifikasi untuk menjual atau membeli dengan aman.</p>
+          </div>
+          <div class="step">
+            <div style="display:flex;gap:12px;align-items:center"><div class="num">2</div><strong>Upload listing</strong></div>
+            <p style="color:var(--muted);margin-top:10px">Tambahkan screenshot, deskripsi, dan harga. Sertakan instruksi transfer di notes.</p>
+          </div>
+          <div class="step">
+            <div style="display:flex;gap:12px;align-items:center"><div class="num">3</div><strong>Selesaikan transaksi</strong></div>
+            <p style="color:var(--muted);margin-top:10px">Gunakan escrow internal atau layanan pihak ketiga yang dipercaya komunitas.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="big-cta" style="align-items:flex-start;gap:16px;flex-direction:column">
+          <div class="cta-text">
+            <h3 style="margin:0 0 8px">Kontak Lyrus</h3>
+            <p style="margin:0;color:var(--muted)">Hubungi kami lewat Instagram atau WhatsApp. Klik salah satu tombol di bawah untuk langsung membuka chat atau profil.</p>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <!-- Ganti nomor & username sesuai milikmu -->
+            <a id="waLink" class="btn" href="https://wa.me/628998051629" target="_blank" rel="noopener">WhatsApp</a>
+            <a id="igLink" class="btn ghost" href="https://www.instagram.com/irhabsy/" target="_blank" rel="noopener">Instagram</a>
+            <small style="color:var(--muted);font-size:0.9rem">Nomor WhatsApp telah diset ke <strong>08998051629</strong> (format internasional: <code>628998051629</code>).</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="big-cta">
+          <div class="cta-text">
+            <h3 style="margin:0 0 8px">Siap mulai jual / beli di Lyrus?</h3>
+            <p style="margin:0;color:var(--muted)">Masukkan Discord atau username Roblox Anda, kami akan bantu verifikasi dan list itemmu.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <input id="userId" type="text" placeholder="Discord#1234 atau Roblox username" style="padding:12px 14px;border-radius:12px;border:1px solid #eaeaea;background:transparent;min-width:260px;font-size:0.95rem">
+            <button class="btn" id="startSignupBtn">Get started</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>© <strong>Lyrus</strong> • Built for Fisch (Roblox)</div>
+      <div style="display:flex;gap:18px;align-items:center"><a class="link" href="#">Terms</a><a class="link" href="#contact">Contact</a></div>
+    </footer>
+  </div>
+
+  <!-- Simple modals & interactions -->
+  <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,15,0.45);backdrop-filter:blur(2px);align-items:center;justify-content:center;padding:24px">
+    <div style="width:min(720px,96%);background:var(--card);border-radius:18px;padding:20px;box-shadow:var(--glass-shadow);">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Tambah Listing</h3><button id="closeModalBtn" class="btn ghost">Tutup</button></div>
+      <p style="color:var(--muted)">Isi detail listingmu. Untuk upload screenshot, enkripsi atau kirim lewat Discord support kami.</p>
+      <form id="sellForm" style="display:grid;gap:10px;margin-top:12px">
+        <input id="listingTitle" required placeholder="Judul listing" style="padding:12px;border-radius:10px;border:1px solid #eee">
+        <input id="listingPrice" required placeholder="Harga (mis: 1200)" style="padding:12px;border-radius:10px;border:1px solid #eee">
+        <textarea id="listingDesc" placeholder="Deskripsi singkat" rows="4" style="padding:12px;border-radius:10px;border:1px solid #eee"></textarea>
+        <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" id="cancelSellBtn" class="btn ghost">Batal</button><button class="btn" type="submit">Submit</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Define functions as properties of window to ensure they are available to inline handlers if needed
+    window.openSellModal = function(){ document.getElementById('modal').style.display = 'flex'; };
+    window.closeSellModal = function(){ document.getElementById('modal').style.display = 'none'; };
+    window.startSignup = function(){
+      const v = document.getElementById('userId').value.trim();
+      if(!v){ alert('Masukkan username atau Discord Anda.'); return; }
+      alert('Permintaan diterima. Tim Lyrus akan menghubungi: ' + v);
+    };
+    window.openBuy = function(item){
+      alert('Proses pembelian: ' + item + ' (contoh). Implementasikan alur pembayaran/escrow di backend');
+    };
+    window.scrollToSell = function(){
+      // Smooth scroll to the large CTA (last section) if exists
+      const target = document.querySelector('.big-cta');
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'end'}); }
+      else { window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'}); }
+    };
+
+    // Safe DOM wiring after DOM content loaded
+    document.addEventListener('DOMContentLoaded', function(){
+      // Wire header Sell button to scrollToSell
+      const sellBtn = document.getElementById('sellBtn');
+      if(sellBtn) sellBtn.addEventListener('click', window.scrollToSell);
+
+      // Wire add listing button to open modal
+      const addListingBtn = document.getElementById('addListingBtn');
+      if(addListingBtn) addListingBtn.addEventListener('click', window.openSellModal);
+
+      // Modal close / cancel
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      if(closeModalBtn) closeModalBtn.addEventListener('click', window.closeSellModal);
+      const cancelSellBtn = document.getElementById('cancelSellBtn');
+      if(cancelSellBtn) cancelSellBtn.addEventListener('click', window.closeSellModal);
+
+      // Sell form submit handler (avoid inline JS string issues)
+      const sellForm = document.getElementById('sellForm');
+      if(sellForm){
+        sellForm.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          // Collect form values (simple example)
+          const title = document.getElementById('listingTitle').value.trim();
+          const price = document.getElementById('listingPrice').value.trim();
+          const desc = document.getElementById('listingDesc').value.trim();
+          if(!title || !price){ alert('Judul dan harga wajib diisi.'); return; }
+          // Placeholder action — replace with actual backend call
+          alert('Listing submitted (contoh). Ganti dengan backend Anda');
+          window.closeSellModal();
+        });
+      }
+
+      // Wire buy buttons in product grid
+      document.querySelectorAll('[data-item]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          const item = this.getAttribute('data-item') || 'Item';
+          window.openBuy(item);
+        });
+      });
+
+      // Wire start signup button
+      const startSignupBtn = document.getElementById('startSignupBtn');
+      if(startSignupBtn) startSignupBtn.addEventListener('click', window.startSignup);
+
+      // Helper: set contact links if needed programmatically (optional)
+      window.setContacts = function(waNumber, igUsername){
+        if(waNumber) document.getElementById('waLink').href = 'https://wa.me/' + waNumber.replace(/[^0-9]/g,'');
+        if(igUsername) document.getElementById('igLink').href = 'https://instagram.com/' + igUsername.replace(/^@/,'');
+      };
+
+    });
+  </script>
+</body>
+</html>
